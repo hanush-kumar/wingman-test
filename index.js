@@ -23,6 +23,10 @@ function basicAuth(req, res, next) {
   }
 }
 
+app.get("/", (_req, res) => {
+  res.send("Wingman Auth API is running");
+});
+
 app.get("/api/verify", basicAuth, (req, res) => {
   res.json({
     message: "Authentication successful",
