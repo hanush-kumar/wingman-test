@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 
+app.use(express.json()); // parse JSON bodies
+
 const USERNAME = "admin";
 const PASSWORD = "password123";
 
@@ -38,10 +40,12 @@ app.get("/api/logout", (_req, res) => {
   res.status(401).send("Logged out. Please re-authenticate.");
 });
 
-app.get("/api/verify", basicAuth, (req, res) => {
+// Echo back request data and headers to confirm receipt
+app.post("/api/verify", basicAuth, (req, res) => {
   res.json({
-    message: "Authentication successful",
-    status: "response reached"
+    message: "response reached",
+    headers: req.headers,
+    data: req.body
   });
 });
 
