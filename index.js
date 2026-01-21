@@ -40,12 +40,11 @@ app.get("/api/logout", (_req, res) => {
   res.status(401).send("Logged out. Please re-authenticate.");
 });
 
-// Echo back request data and headers to confirm receipt
+// Echo back request data to confirm receipt
 app.post("/api/verify", basicAuth, (req, res) => {
   res.json({
     message: "response reached",
-    headers: req.headers,
-    data: req.body
+    ...req.body
   });
 });
 
